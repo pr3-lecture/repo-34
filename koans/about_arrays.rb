@@ -33,15 +33,19 @@ class AboutArrays < Neo::Koan
   end
 
   def test_slicing_arrays
+    # a = [ | element0 | element1 | element2 | element3 | ]
+    # x =   0          1          2          3          4   ==> for a[x,length]
+    #           a[0]       a[1]       a[2]       a[3]       ==> normal access
+
     array = [:peanut, :butter, :and, :jelly]
 
-    assert_equal __, array[0,1]
-    assert_equal __, array[0,2]
-    assert_equal __, array[2,2]
-    assert_equal __, array[2,20]
-    assert_equal __, array[4,0]
-    assert_equal __, array[4,100]
-    assert_equal __, array[5,0]
+    assert_equal [:peanut], array[0,1]
+    assert_equal [:peanut, :butter], array[0,2]
+    assert_equal [:and, :jelly], array[2,2]
+    assert_equal [:and, :jelly], array[2,20]
+    assert_equal [], array[4,0]
+    assert_equal [], array[4,100]
+    assert_equal nil, array[5,0]
   end
 
   def test_arrays_and_ranges
