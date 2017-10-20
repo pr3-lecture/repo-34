@@ -25,9 +25,11 @@ class AboutArrayAssignment < Neo::Koan
   end
 
   def test_parallel_assignments_with_too_few_variables
+    #stupid rule: if it is just first_name it is an array.
+    #             because of last_name first_name is a String and last_name nil
     first_name, last_name = ["Cher"]
-    assert_equal __, first_name
-    assert_equal __, last_name
+    assert_equal "Cher", first_name
+    assert_equal nil, last_name
   end
 
   def test_parallel_assignments_with_subarrays
