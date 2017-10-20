@@ -34,6 +34,13 @@ class AboutHashes < Neo::Koan
     # Because key can be an Integer
     # hash = {0 => "Integer", "0" => "String"}
     # hash[0] returns "Integer" ; You could accidentally think hash is an array
+    # different errors when accessing unkonown keys
+    # hash[:unknown] => nil
+    # hash.fetch(:unknown) => KeyError
+    # hash1 = {2 => nil}
+    # when you use hash1[2] you don't know, whether key exists or not
+    # but with fetch you do know the key 2 exists, because no KeyError
+    # exception was thrown
   end
 
   def test_changing_hashes
@@ -89,14 +96,14 @@ class AboutHashes < Neo::Koan
     hash1 = Hash.new
     hash1[:one] = 1
 
-    assert_equal __, hash1[:one]
-    assert_equal __, hash1[:two]
+    assert_equal 1, hash1[:one]
+    assert_equal nil, hash1[:two]
 
-    hash2 = Hash.new("dos")
+    hash2 = Hash.new("dos") # sets default value for unknown keys, nil is normal
     hash2[:one] = 1
 
-    assert_equal __, hash2[:one]
-    assert_equal __, hash2[:two]
+    assert_equal 1, hash2[:one]
+    assert_equal "dos", hash2[:two]
   end
 
   def test_default_value_is_the_same_object
