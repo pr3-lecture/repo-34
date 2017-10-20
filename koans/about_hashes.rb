@@ -107,7 +107,7 @@ class AboutHashes < Neo::Koan
   end
 
   def test_default_value_is_the_same_object
-    hash = Hash.new([])
+    hash = Hash.new([]) # all keys point to same array
 
     hash[:one] << "uno"
     hash[:two] << "dos"
@@ -120,13 +120,13 @@ class AboutHashes < Neo::Koan
   end
 
   def test_default_value_with_block
-    hash = Hash.new {|hash, key| hash[key] = [] }
+    hash = Hash.new {|hash, key| hash[key] = [] } # every key has an own array
 
     hash[:one] << "uno"
     hash[:two] << "dos"
 
-    assert_equal __, hash[:one]
-    assert_equal __, hash[:two]
-    assert_equal __, hash[:three]
+    assert_equal ["uno"], hash[:one]
+    assert_equal ["dos"], hash[:two]
+    assert_equal [], hash[:three]
   end
 end
