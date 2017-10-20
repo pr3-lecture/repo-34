@@ -71,13 +71,18 @@ class AboutHashes < Neo::Koan
   end
 
   def test_combining_hashes
+    # merge creates a new hash object.
+    # h1.merge h2 => no side effects on neither objects
+    # if h1 contains a key equal to one of h2's key, the value of h1's key
+    # will be overidden
+
     hash = { "jim" => 53, "amy" => 20, "dan" => 23 }
     new_hash = hash.merge({ "jim" => 54, "jenny" => 26 })
 
-    assert_equal __, hash != new_hash
+    assert_equal true, hash != new_hash
 
-    expected = { "jim" => __, "amy" => 20, "dan" => 23, "jenny" => __ }
-    assert_equal __, expected == new_hash
+    expected = { "jim" => 54, "amy" => 20, "dan" => 23, "jenny" => 26 }
+    assert_equal true, expected == new_hash
   end
 
   def test_default_value
