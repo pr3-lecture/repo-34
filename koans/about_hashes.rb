@@ -22,14 +22,18 @@ class AboutHashes < Neo::Koan
 
   def test_accessing_hashes_with_fetch
     hash = { :one => "uno" }
-    assert_equal __, hash.fetch(:one)
-    assert_raise(___) do
+    assert_equal "uno", hash.fetch(:one)
+    assert_raise(KeyError) do
       hash.fetch(:doesnt_exist)
     end
 
     # THINK ABOUT IT:
     #
     # Why might you want to use #fetch instead of #[] when accessing hash keys?
+    #
+    # Because key can be an Integer
+    # hash = {0 => "Integer", "0" => "String"}
+    # hash[0] returns "Integer" ; You could accidentally think hash is an array
   end
 
   def test_changing_hashes
