@@ -121,9 +121,9 @@ EOS
   end
 
   def test_single_quotes_sometimes_interpret_escape_characters
-    string = '\\\''
-    assert_equal __, string.size
-    assert_equal __, string
+    string = '\\\'' # => "\\'" => "\\" + "''"
+    assert_equal 2, string.size
+    assert_equal "\\'", string
   end
 
   def test_double_quoted_strings_interpolate_variables
