@@ -92,9 +92,9 @@ EOS
   def test_the_shovel_operator_will_also_append_content_to_a_string
     hi = "Hello, "
     there = "World"
-    hi << there
-    assert_equal __, hi
-    assert_equal __, there
+    hi << there # same as +=
+    assert_equal "Hello, World", hi
+    assert_equal "World", there
   end
 
   def test_the_shovel_operator_modifies_the_original_string
