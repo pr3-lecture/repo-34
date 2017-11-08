@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/neo')
 
+# Hashes are used in caches, i.e. key url and value data to be loaded
 class AboutHashes < Neo::Koan
   def test_creating_hashes
     empty_hash = Hash.new
