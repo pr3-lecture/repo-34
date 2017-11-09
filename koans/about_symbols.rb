@@ -58,7 +58,8 @@ class AboutSymbols < Neo::Koan
 
   def test_symbols_with_interpolation_can_be_built
     value = "and"
-    symbol = :"cats #{value} dogs"
+    symbol = :"cats #{value} dogs" # value NOT :cats and dogs, :"cats and dogs"
+                                   # if symbol contains spaces "" is required
 
     assert_equal "cats and dogs".to_sym, symbol
   end
@@ -67,7 +68,7 @@ class AboutSymbols < Neo::Koan
     symbol = :cats
     string = "It is raining #{symbol} and dogs."
 
-    assert_equal __, string
+    assert_equal "It is raining cats and dogs.", string
   end
 
   def test_symbols_are_not_strings
