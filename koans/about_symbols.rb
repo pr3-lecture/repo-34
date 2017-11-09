@@ -16,11 +16,13 @@ class AboutSymbols < Neo::Koan
   end
 
   def test_identical_symbols_are_a_single_internal_object
+    # every symbol value is unique. There can not be 2 symbols with same value
+    # same value means, they are identical
     symbol1 = :a_symbol
     symbol2 = :a_symbol
 
-    assert_equal __, symbol1           == symbol2
-    assert_equal __, symbol1.object_id == symbol2.object_id
+    assert_equal true, symbol1           == symbol2
+    assert_equal true, symbol1.object_id == symbol2.object_id
   end
 
   def test_method_names_become_symbols
