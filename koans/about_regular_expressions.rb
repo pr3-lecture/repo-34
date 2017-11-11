@@ -40,11 +40,12 @@ class AboutRegularExpressions < Neo::Koan
   # We say that the repetition operators above are "greedy."
   #
   # Why?
-
+  # Because they take as many letters as they can to match
   # ------------------------------------------------------------------
 
   def test_the_left_most_match_wins
-    assert_equal __, "abbccc az"[/az*/]
+    # first match wins
+    assert_equal "a", "abbccc az"[/az*/]
   end
 
   # ------------------------------------------------------------------
