@@ -153,7 +153,8 @@ class AboutRegularExpressions < Neo::Koan
   end
 
   def test_sub_is_like_find_and_replace
-    assert_equal __, "one two-three".sub(/(t\w*)/) { $1[0, 1] }
+    # first match of pattern replaced by second argument
+    assert_equal "one t-three", "one two-three".sub(/(t\w*)/) { $1[0, 1] }
   end
 
   def test_gsub_is_like_find_and_replace_all
