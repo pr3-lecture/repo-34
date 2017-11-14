@@ -14,7 +14,18 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  array = [] << a << b << c
+  count = []
+  array.each {|x| count << (array.count(x))}
+  max = count.max
+  case max
+  when 1
+    :scalene
+  when 2
+    :isosceles
+  when 3
+    :equilateral
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
