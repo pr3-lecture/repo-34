@@ -26,7 +26,7 @@ class AboutSymbols < Neo::Koan
   end
 
   def test_method_names_become_symbols
-    # bug irb returns false, but koans expects true
+    # symbol is in the map, because return value of method is symbol
     symbols_as_strings = Symbol.all_symbols.map { |x| x.to_s }
     assert_equal true, symbols_as_strings.include?("test_method_names_become_symbols")
   end
@@ -102,5 +102,5 @@ class AboutSymbols < Neo::Koan
   #
   # Why is it not a good idea to dynamically create a lot of symbols?
 
-  # They stay in the memory until program ends. 
+  # They stay in the memory until program ends.
 end
