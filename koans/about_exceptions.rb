@@ -6,10 +6,12 @@ class AboutExceptions < Neo::Koan
   end
 
   def test_exceptions_inherit_from_Exception
-    assert_equal __, MySpecialError.ancestors[1]
-    assert_equal __, MySpecialError.ancestors[2]
-    assert_equal __, MySpecialError.ancestors[3]
-    assert_equal __, MySpecialError.ancestors[4]
+    # MySpecialError.ancestors =>
+    # MM, RuntimeError, StandardError, Exception, Object, Kernel, BasicObject
+    assert_equal RuntimeError, MySpecialError.ancestors[1]
+    assert_equal StandardError, MySpecialError.ancestors[2]
+    assert_equal Exception, MySpecialError.ancestors[3]
+    assert_equal Object, MySpecialError.ancestors[4]
   end
 
   def test_rescue_clause
