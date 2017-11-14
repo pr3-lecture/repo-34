@@ -16,7 +16,7 @@ class AboutControlStatements < Neo::Koan
     if true
       result = :true_value
     end
-    assert_equal :true_value, result
+    assert_equal :true_value, result #
   end
 
   def test_if_statements_return_values
