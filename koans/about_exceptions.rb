@@ -53,10 +53,10 @@ class AboutExceptions < Neo::Koan
     rescue StandardError
       # no code here
     ensure
-      result = :always_run
+      result = :always_run # like finally in Java
     end
 
-    assert_equal __, result
+    assert_equal :always_run, result
   end
 
   # Sometimes, we must know about the unknown
