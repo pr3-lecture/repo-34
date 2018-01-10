@@ -2,23 +2,13 @@
 
 all: encrypt decrypt cryptoTest runtest clean
 
-runtest:
-	test.exe
+runtest: test.exe
 
-encrypt: crypto.o
-	gcc -o encrypt crypto.o
+encrypt: gcc -o encrypt main.c crypto.c
 
-decrypt: crypto.o
-	gcc -o decrypt crypto.o
+decrypt: gcc -o decrypt main.c crypto.c
 
-cryptoTest: test.o
-	gcc -o test test.o
-
-crypto.o: crypto.c
-	gcc -Wall -c crypto.c
-
-test.o: test.c
-	gcc -Wall -c test.c
+test:	gcc -o test test.c crypto.c
 
 clean:
-	rm -f run.o test.o crypto.o test decrypt encrypt
+	rm -f encrypt.exe decrypt.exe test.exe
