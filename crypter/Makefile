@@ -1,4 +1,4 @@
-.PHONY: all create clean test
+.PHONY: all clean test
 
 all: encrypt decrypt cryptoTest runtest clean
 
