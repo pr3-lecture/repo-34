@@ -56,13 +56,16 @@ int checkDecypherText(const char* decypherText) {
 }
 
 int encrypt(KEY key, const char* input, char* output) {
-  int valid_key = checkKey(key);
-  int valid_input = checkInput(input);
+  int invalid_key = checkKey(key);
+  int invalid_input = checkInput(input);
 
-  if(valid_key != 0)
-    return valid_key;
-  if(valid_input != 0)
-    return valid_input;
+  if(invalid_key || invalid_input)
+    output = NULL;
+
+  if(invalid_key)
+    return invalid_key;
+  if(invalid_input)
+    return invalid_input;
 
   int i = 0;
   int key_length = strlen(key.chars);
@@ -71,17 +74,21 @@ int encrypt(KEY key, const char* input, char* output) {
     output[i] = ((input[i] - 'A' + 1) ^ (key.chars[i % key_length] - 'A' + 1)) + 'A' - 1;
     i++;
   }
+  output[i] = '\0';
   return 0;
 }
 
 int decrypt(KEY key, const char* cypherText, char* output) {
-  int valid_key = checkKey(key);
-  int valid_cypherText = checkDecypherText(cypherText);
+  int invalid_key = checkKey(key);
+  int invalid_cypherText = checkDecypherText(cypherText);
 
-  if(valid_key != 0)
-    return valid_key;
-  if(valid_cypherText != 0)
-    return valid_cypherText;
+  if(invalid_key || invalid_cypherText)
+    output = NULL;
+
+  if(invalid_key)
+    return invalid_key;
+  if(invalid_cypherText)
+    return invalid_cypherText;
 
   int i = 0;
   int key_length = strlen(key.chars);
@@ -90,92 +97,6 @@ int decrypt(KEY key, const char* cypherText, char* output) {
     output[i] = ((cypherText[i] - 'A' + 1) ^ (key.chars[i % key_length] - 'A' + 1)) + 'A' - 1;
     i++;
   }
-  return 0;
-}
-
-int main(int argc, char const *argv[]) {
-  // int i = 0;
-  // KEY key;
-  // while(i < argc)
-  //   printf("%s", argv[i++]);
-  // printf("\n");
-  //
-  // char* input = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  // char* output = (char*) malloc(strlen(input) + 1);
-  // key.chars = "TPERULES";
-  // encrypt(key, input, output);
-  // printf("original  : %s\n", input);
-  // printf("key       : ");
-  // i = 0;
-  // while(input[i] != '\0')
-  //   printf("%c", key.chars[i++ % strlen(key.chars)]);
-  // printf("\n");
-  // printf("output    : %s\n", output);
-  //
-  // char* cypherText = (char*) malloc(strlen(output) + 1);
-  // strncpy(cypherText, output, strlen(output));
-  // free(output);
-  // output = NULL;
-  // output = (char*) malloc(strlen(cypherText) + 1);
-  // decrypt(key, cypherText, output);
-  // printf("cypherText: %s\n", cypherText);
-  // printf("key       : ");
-  // i = 0;
-  // while(input[i] != '\0')
-  //   printf("%c", key.chars[i++ % strlen(key.chars)]);
-  // printf("\n");
-  // printf("output    : %s\n", output);
-  // key.chars = NULL;
-  // printf("checkKey(): %d\n", checkKey(key));
-  // input = NULL;
-  // printf("checkInput(): %d\n", checkInput(input));
-  // output = "";
-  // printf("checkDecypherText(): %d\n", checkDecypherText(output));
-
-  int i = 0;
-  while(i < argc)
-    printf("%s ", argv[i++]);
-  printf("\n");
-  if(argc < 2)
-    return 7; // E_ARGUMENTS_TOO_SHORT
-  if(argc > 3)
-    return 7; // E_ARGUMENTS_TOO_LONG
-
-  // int mode = argv[0]
-  if(argc == 2) {
-    int buff_length = 255;
-    char buff[255];
-    KEY key;
-    key.chars = argv[1];
-    // strncpy(key.chars, argv[1], strlen(argv[1])); strange fault
-
-    printf("KEY: %s, LENGTH: %d\n", key.chars, strlen(key.chars));
-
-    printf("Enter a String: ");
-    fgets(buff, buff_length, stdin);
-    printf("\nYou String: %s, Length: %d\n", buff, strlen(buff));
-  }
-
-  if(argc == 3) {
-    FILE* f;
-    int buff_length = 255;
-    char buff[255];
-    KEY key;
-    key.chars = argv[1];
-    // strncpy(key.chars, argv[1], strlen(argv[1])); strange fault
-
-    printf("KEY: %s, LENGTH: %d\n", key.chars, strlen(key.chars));
-
-    f = fopen(argv[2] , "r");
-     if(f == NULL) {
-        perror("Error opening file");
-        return(-1);
-     }
-     if(fgets(buff, 60, f) != NULL) {
-        printf("GELESEN von %s: %s, LENGTH: %d\n", argv[2], buff, strlen(buff));
-     }
-     fclose(f);
-  }
-
+  output[i] = '\0';
   return 0;
 }
